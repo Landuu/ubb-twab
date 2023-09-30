@@ -1,5 +1,6 @@
 using ProductsApi;
 using ProductsApi.Repositories;
+using ProductsApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApiDbContext>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductUnitOfWork, ProductUnitOfWork>();
 
 var app = builder.Build();
 

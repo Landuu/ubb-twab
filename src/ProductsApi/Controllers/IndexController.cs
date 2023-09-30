@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProductsApi.Repositories;
+using ProductsApi.Services;
 using Shared.Entities;
 
 namespace ProductsApi.Controllers
@@ -9,10 +10,12 @@ namespace ProductsApi.Controllers
     public class IndexController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
+        private readonly IProductUnitOfWork _unitOfWork;
 
-        public IndexController(IProductRepository productRepository)
+        public IndexController(IProductRepository productRepository, IProductUnitOfWork unitOfWork)
         {
             _productRepository = productRepository;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet]
@@ -32,6 +35,25 @@ namespace ProductsApi.Controllers
         {
             var products = _productRepository.GetProducts().ToList();
             return Results.Json(products);
+        }
+
+        [HttpGet("unit")]
+        public IResult GetUnit()
+        {
+            var p1 = new ProductEntity()
+            {
+                Name = "Prod",
+                Price = 11.2m
+            };
+
+            var p2 = new ProductEntity()
+            {
+                Name = "Prod2",
+                Price = 24.4m
+            };
+
+            _unitOfWork.AddProducts(p1, p2);
+            _unitOfWork.Save();
         }
 
         [HttpGet("insert")]
