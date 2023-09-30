@@ -54,6 +54,7 @@ namespace ProductsApi.Controllers
 
             _unitOfWork.AddProducts(p1, p2);
             _unitOfWork.Save();
+            return Results.Text("Ok");
         }
 
         [HttpGet("insert")]
