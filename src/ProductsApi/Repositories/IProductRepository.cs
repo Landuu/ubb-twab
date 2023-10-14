@@ -11,5 +11,7 @@ namespace ProductsApi.Repositories
         void DeleteProduct(int id);
         void UpdateProduct(ProductEntity product);
         void Save();
+        Task InsertProductAsync(ProductEntity product, CancellationToken cancellationToken);
+        Task SaveAsync(CancellationToken cancellationToken);
     }
 }

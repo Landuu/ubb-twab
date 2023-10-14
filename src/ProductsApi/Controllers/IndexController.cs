@@ -21,12 +21,6 @@ namespace ProductsApi.Controllers
         [HttpGet]
         public IResult Index()
         {
-            var product = new ProductEntity()
-            {
-                Name = "Test",
-                Price = 1.20m
-            };
-
             return Results.Text("Hello World!");
         }
 
@@ -36,6 +30,14 @@ namespace ProductsApi.Controllers
             var products = _productRepository.GetProducts().ToList();
             return Results.Json(products);
         }
+
+
+
+
+
+
+
+
 
         [HttpGet("unit")]
         public IResult GetUnit()

@@ -34,10 +34,21 @@ namespace ProductsApi.Repositories
             _set.Add(product);
         }
 
+        public async Task InsertProductAsync(ProductEntity product, CancellationToken cancellationToken)
+        {
+            await _set.AddAsync(product, cancellationToken);
+        }
+
         public void UpdateProduct(ProductEntity product)
         {
             _set.Update(product);
         }
+
+        public async Task SaveAsync(CancellationToken cancellationToken)
+        {
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+
         public void Save()
         {
             _context.SaveChanges();
